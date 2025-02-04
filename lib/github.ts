@@ -1,3 +1,4 @@
+import { repoConfig } from "@/config";
 import { Octokit } from "octokit";
 
 const token = process.env.GITHUB_TOKEN;
@@ -37,11 +38,6 @@ export async function fetchBlob(url: string): Promise<string> {
   return Buffer.from(base64, "base64").toString();
 }
 
-export const sharedConfig = {
-  owner: "vercel",
-  repo: "next.js",
-};
-
 /**
  * @returns Sha code of `/docs` directory in GitHub repo
  */
@@ -49,8 +45,9 @@ export async function getDocsSha() {
   const out = await octokit.request(
     "GET /repos/{owner}/{repo}/git/trees/{tree_sha}",
     {
-      ...sharedConfig,
-      tree_sha: "canary",
+      owner: repoConfig.owner,
+      repo: repoConfig.repo,
+      tree_sha: repoConfig.branch,
       headers: {
         "X-GitHub-Api-Version": "2022-11-28",
       },

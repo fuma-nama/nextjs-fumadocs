@@ -1,10 +1,10 @@
 import type { Source, VirtualFile } from "fumadocs-core/source";
 import { compile, type CompiledPage } from "../compile-md";
 import * as path from "node:path";
-import { getTitleFromFile } from "../source";
 import { meta } from "../meta";
 import FastGlob from "fast-glob";
 import { readFile } from "node:fs/promises";
+import { getTitleFromFile } from "../get-title-from-file";
 
 const dir = "next.js/docs";
 
